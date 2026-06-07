@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تثبيت تطبيق صيدلية النسور</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #0a0f1e;
+    color: #e8f0fe;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container { max-width: 700px; margin: 0 auto; }
+  .header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #111827, #1a2744);
+    border-radius: 20px;
+    margin-bottom: 24px;
+    border: 1px solid #1e3050;
+  }
+  .logo { font-size: 4rem; margin-bottom: 12px; }
+  h1 { font-size: 1.8rem; color: #00d4aa; margin-bottom: 8px; }
+  .subtitle { color: #8899bb; font-size: 1rem; }
+  .url-box {
+    background: #1a2236;
+    border: 2px solid #00d4aa;
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    font-size: 1rem;
+    color: #00d4aa;
+    margin: 20px 0;
+    word-break: break-all;
+    cursor: pointer;
+  }
+  .url-box:hover { background: #243044; }
+  .share-hint { font-size: 0.8rem; color: #8899bb; margin-top: 6px; }
+
+  .section {
+    background: #111827;
+    border: 1px solid #1e3050;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e8f0fe;
+  }
+  .platform-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .android { background: rgba(61,220,132,0.15); color: #3ddc84; }
+  .ios { background: rgba(0,122,255,0.15); color: #007aff; }
+  .pc { background: rgba(0,153,255,0.15); color: #0099ff; }
+
+  .steps { list-style: none; }
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #1e3050;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #00d4aa;
+    color: #000;
+    font-weight: 900;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-text { flex: 1; line-height: 1.6; font-size: 0.95rem; }
+  .step-text strong { color: #00d4aa; }
+  .step-sub { font-size: 0.82rem; color: #8899bb; margin-top: 4px; }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .feature {
+    background: #1a2236;
+    border: 1px solid #1e3050;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .feature-icon { font-size: 1.8rem; margin-bottom: 6px; }
+  .feature-name { font-size: 0.82rem; font-weight: 600; color: #e8f0fe; }
+  .feature-desc { font-size: 0.72rem; color: #8899bb; margin-top: 2px; }
+
+  .qr-section {
+    text-align: center;
+    padding: 20px;
+    background: #1a2236;
+    border-radius: 12px;
+    margin-top: 12px;
+  }
+  .qr-placeholder {
+    width: 160px; height: 160px;
+    background: #fff;
+    border-radius: 12px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: #000;
+    padding: 10px;
+    text-align: center;
+  }
+  canvas { border-radius: 12px; }
+
+  .copy-btn {
+    background: #00d4aa;
+    border: none;
+    color: #000;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 0 20px rgba(0,212,170,0.4); }
+  .note {
+    background: rgba(255,165,2,0.1);
+    border: 1px solid rgba(255,165,2,0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: #ffa502;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="logo">💊</div>
+    <h1>صيدلية النسور</h1>
+    <div class="subtitle">نظام كاشير الصيدلية — الفلوجة، الأنبار</div>
+    <div class="url-box" onclick="copyURL()">
+      https://iqiraw98-spec.github.io/Iqi22/
+      <div class="share-hint">اضغط للنسخ والمشاركة</div>
+    </div>
+    <button class="copy-btn" onclick="copyURL()">📋 نسخ الرابط للمشاركة</button>
+  </div>
+
+  <!-- QR Code للمشاركة -->
+  <div class="section">
+    <div class="section-title">📲 مشاركة التطبيق بـ QR Code</div>
+    <div class="qr-section">
+      <canvas id="qrCanvas"></canvas>
+      <div style="font-size:0.85rem;color:#8899bb;margin-top:10px;">امسح الكود بكاميرا الجوال لفتح التطبيق مباشرة</div>
+    </div>
+  </div>
+
+  <!-- أندرويد -->
+  <div class="section">
+    <div class="section-title">
+      🤖 تثبيت على الأندرويد
+      <span class="platform-badge android">Android</span>
+    </div>
+    <ul class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">افتح الرابط في متصفح <strong>Chrome</strong>
+          <div class="step-sub">google.com/chrome — الأفضل للـ PWA</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">ستظهر رسالة تلقائية <strong>"إضافة إلى الشاشة الرئيسية"</strong> أسفل الشاشة
+          <div class="step-sub">إذا لم تظهر: اضغط النقاط الثلاث ⋮ ← "إضافة إلى الشاشة الرئيسية"</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">اضغط <strong>"تثبيت"</strong> أو <strong>"إضافة"</strong></div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">✅ سيظهر أيقونة التطبيق على شاشتك الرئيسية!</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- iPhone -->
+  <div class="section">
+    <div class="section-title">
+      🍎 تثبيت على iPhone / iPad
+      <span class="platform-badge ios">iOS</span>
+    </div>
+    <ul class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">افتح الرابط في متصفح <strong>Safari</strong> (مهم — ليس Chrome)
+          <div class="step-sub">Safari هو الوحيد الذي يدعم التثبيت على iPhone</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">اضغط زر <strong>المشاركة</strong> 
+          <strong style="font-size:1.2em;">⎋</strong> (المربع بالسهم لأعلى) أسفل الشاشة</div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">اختر <strong>"إضافة إلى الشاشة الرئيسية"</strong>
+          <div class="step-sub">مرر للأسفل في القائمة إذا لم تجدها</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">اضغط <strong>"إضافة"</strong> في الزاوية العليا اليمنى</div>
+      </li>
+      <li class="step">
+        <div class="step-num">5</div>
+        <div class="step-text">✅ سيظهر التطبيق على شاشتك الرئيسية!</div>
+      </li>
+    </ul>
+    <div class="note">⚠️ على iPhone يجب استخدام Safari فقط — Chrome لا يدعم التثبيت على iOS</div>
+  </div>
+
+  <!-- PC -->
+  <div class="section">
+    <div class="section-title">
+      💻 تثبيت على الكمبيوتر
+      <span class="platform-badge pc">Windows / Mac</span>
+    </div>
+    <ul class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">افتح الرابط في <strong>Google Chrome</strong> أو <strong>Microsoft Edge</strong></div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">ابحث عن أيقونة <strong>⊕</strong> في شريط العنوان يمين الشاشة
+          <div class="step-sub">أو: القائمة ⋮ ← "تثبيت صيدلية النسور"</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">اضغط <strong>"تثبيت"</strong></div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">✅ سيفتح التطبيق كنافذة مستقلة بدون شريط المتصفح!</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- مميزات -->
+  <div class="section">
+    <div class="section-title">✨ مميزات التطبيق</div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📴</div>
+        <div class="feature-name">يعمل بدون نت</div>
+        <div class="feature-desc">بعد أول تحميل</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <div class="feature-name">شاشة كاملة</div>
+        <div class="feature-desc">بدون متصفح</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💾</div>
+        <div class="feature-name">يحفظ البيانات</div>
+        <div class="feature-desc">محلياً تلقائياً</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📷</div>
+        <div class="feature-name">كاميرا باركود</div>
+        <div class="feature-desc">مسح فوري</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-name">تحديث تلقائي</div>
+        <div class="feature-desc">عند الاتصال</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🆓</div>
+        <div class="feature-name">مجاني تماماً</div>
+        <div class="feature-desc">بدون App Store</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// QR Code بسيط بدون مكتبة خارجية
+function generateQR() {
+  const canvas = document.getElementById('qrCanvas');
+  const url = 'https://iqiraw98-spec.github.io/Iqi22/';
+  // استخدام Google Charts API لتوليد QR
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+  };
+  img.onerror = function() {
+    // fallback: show URL text
+    canvas.style.display = 'none';
+    const d = document.createElement('div');
+    d.style.cssText = 'background:#fff;padding:12px;border-radius:8px;color:#000;font-size:0.75rem;word-break:break-all;width:200px;margin:0 auto;text-align:center;';
+    d.textContent = url;
+    canvas.parentNode.insertBefore(d, canvas);
+  };
+  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(url)}&bgcolor=ffffff&color=0a0f1e&margin=10`;
+}
+
+function copyURL() {
+  const url = 'https://iqiraw98-spec.github.io/Iqi22/';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = '✅ تم النسخ!';
+      setTimeout(() => btn.textContent = '📋 نسخ الرابط للمشاركة', 2000);
+    });
+  } else {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('تم نسخ الرابط: ' + url);
+  }
+}
+
+generateQR();
+</script>
+</body>
+</html>
